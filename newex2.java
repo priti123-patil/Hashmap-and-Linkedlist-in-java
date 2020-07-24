@@ -1,20 +1,33 @@
 import java.io.*;
 import java.util.*;
-class newex2
-{
-public static <T extends Object & Comparable<? super T>> T get_even_odd(List<? extends T> list,int begin, int end) {
-            T even=0;
-            T odd=0;
-            for (++begin;begin<end;++begin) 
-                if (begin%2==0) 
-                     even++;
-                    
-return maxelem;
+class Algorithm {
+    public static <T> int countIf(Collection<T> c, UnaryPredicate<T> p) {
+
+        int count = 0;
+        for (T elem : c)
+            if (p.test(elem))
+                ++count;
+        return count;
+    }
 }
-public static void main(String args[])
-{
-List<Integer> arr=Arrays.asList(2,4,6,7,8,9,90,78,41,56,79,45,65,85);
-int x=newex.getMax(arr,0,arr.size());
-System.out.println("maximal number:" +x);
+interface UnaryPredicate<T> {
+    public boolean test(T obj);
 }
+class OddPredicate implements UnaryPredicate<Integer> {
+    public boolean test(Integer i) { return i % 2 != 0; }
+}
+class EvenPredicate implements UnaryPredicate<Integer> {
+    public boolean test(Integer i) { return i % 2 == 0; }
+}
+
+
+public class newex2 {
+    public static void main(String[] args) {
+        Collection<Integer> ci = Arrays.asList(1, 2, 3, 4);
+        int count = Algorithm.countIf(ci, new OddPredicate());
+        int count2 = Algorithm.countIf(ci, new EvenPredicate());
+System.out.println("Number of odd integers = " + count);
+   System.out.println("Number of even integers = " + count2);
+  
+ }
 }
